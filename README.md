@@ -51,7 +51,7 @@ The namespace `geo` is used for GeoSPARQL. The names spaces `rr`, `rdfs`, and `x
 We first create the triples map for weather stations (the feature). Every triples map needs a logical table and a subject map. The subject map is responsible for creating the subjects and any type declarations.
 
 ```
-PREFIXES APPEAR HERE
+# PREFIXES APPEAR HERE
 
 <#WeatherStation>
   a rr:TriplesMap ;
