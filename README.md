@@ -270,6 +270,8 @@ Then I change the two predicate object maps of our weather triples map as follow
 R2RML states that if the graph maps of both the subject map and the predicate object map are empty, then triples are written to the default graph; otherwise the triples are written to the union of both graph maps. Since the subject map has no graph maps (i.e., {}), the union is {} U {`http://data.example.org/graph/geo`}. In other words, those triples will appear in the named graph http://data.example.org/graph/geo and not in the default graph:
 
 ```
+# TRIPLES IN DEFAULT GRAPH OMITTED
+
 <http://data.example.org/graph/geo> {
     <http://data.example.org/ws/Dublin%20Airport>
             <http://www.w3.org/2003/01/geo/wgs84_pos#lat>
