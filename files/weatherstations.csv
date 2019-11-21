@@ -1,0 +1,4 @@
+Name,Weather_Reading,Agency,LAT,LONG
+M50 Blanchardstown,http://www.nratraffic.ie/weather/default.asp?weatherstation=IR26&selected=true&showonly=true,National Roads Authority,53.3704660326011,-6.38085144711153
+M50 Dublin Airport,http://www.nratraffic.ie/weather/default.asp?weatherstation=IR57&selected=true&showonly=true,National Roads Authority,53.4096411069945,-6.22759742761812
+Dublin Airport,http://www.met.ie/latest/reports.asp,Met Éireann,53.4215060785623,-6.29784754004026

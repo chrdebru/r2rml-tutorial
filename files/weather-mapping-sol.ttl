@@ -1,0 +1,86 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix fcc: <http://www.example.org/ont#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo2: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<#WeatherStation>
+	a rr:TriplesMap ;
+	
+	rr:logicalTable [ rr:tableName "WEATHERSTATIONS" ] ;
+	
+	rr:subjectMap [
+		rr:template "http://data.example.org/ws/{NAME}" ;
+		rr:class geo:Feature ;
+		rr:class fcc:WeatherStation ;
+	] ;
+	
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label ;
+		rr:objectMap [
+			rr:column "NAME" ; rr:language "en" ;
+		] ; 
+		rr:objectMap [
+			rr:column "NAME" ;
+		] ; 
+	] ;
+ 	
+	rr:predicateObjectMap [
+		rr:graph <http://data.example.org/graph/geo> ;
+		rr:predicate geo2:lat ;
+		rr:objectMap [ 
+			rr:column "LAT" ; 
+			rr:datatype xsd:double ; 
+		] ; 
+	] ;
+	
+	rr:predicateObjectMap [
+		rr:graph <http://data.example.org/graph/geo> ;
+		rr:predicate geo2:long ;
+		rr:objectMap [ 
+			rr:column "LONG" ; 
+			rr:datatype xsd:double ; 
+		] ; 
+	] ;
+ 	
+	rr:predicateObjectMap [
+		rr:predicate rdfs:seeAlso ;
+		rr:predicate fcc:withWeatherReading ;
+		rr:objectMap [
+			rr:column "WEATHER_READING" ;
+			rr:termType rr:IRI ;
+		] ; 
+	] ;
+	
+	rr:predicateObjectMap [
+		rr:predicate geo:hasGeometry ;
+		rr:objectMap [
+			rr:parentTriplesMap <#Geometries>;
+			rr:joinCondition [
+				rr:child "NAME" ;
+				rr:parent "NAME" ;
+			] ;
+		] ; 
+	] ;
+	
+	.
+	
+<#Geometries>
+	a rr:TriplesMap ;
+	
+	rr:logicalTable [ rr:tableName "WEATHERSTATIONS" ] ;
+	
+	rr:subjectMap [
+		rr:template "http://data.example.org/geom/{LONG}/{LAT}" ;
+		rr:class geo:Geometry ;
+	] ;
+	
+	rr:predicateObjectMap [
+		rr:predicate geo:asWKT ;
+		rr:objectMap [
+			rr:template "POINT({LONG} {LAT})" ;
+			rr:datatype geo:wktLiteral ;
+		] ; 
+	] ;
+	.
