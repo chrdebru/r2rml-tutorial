@@ -1,13 +1,9 @@
 # R2RML: A Step-by-step Tutorial
 
-<div style="text-align: center">
-
 [Christophe Debruyne ](http://christophedebruyne.be/)  
 ---
 [ADAPT](https://www.adaptcentre.ie/), [Trinity College Dublin](https://www.tcd.ie/)  
 [WISE](https://wise.vub.ac.be/), [Vrije Universiteit Brussel](https://www.vub.be/)
-
-</div>
 
 # 1 Introduction
 
