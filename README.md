@@ -11,7 +11,7 @@ The goal of this tutorial is to familiarize the reader with some core concepts o
 
 While R2RML was intended for relational databases, R2RML-F allows one to access CSV files as relational tables. This tutorial will use this feature so that a relational database will not be required for this tutorial. We use the [H2 Database Engine](https://www.h2database.com/html/main.html) to access CSV files as tables. This means that column names are capitalized (i.e, `emp` becomes `EMP`).
 
-The CSV file we will transform into RDF is [weatherstations.csv](./files/weatherstations.csv). This file contains information on weather stations; their names, locations, the agency responsible for that stations, and a URL to a page with the weather readings of that station. The CSV file contains the following rows (with the first being the header):
+The CSV file we will transform into RDF is [weatherstations.csv](./files/weatherstations.csv). This CSV file was published by [Dublinked.ie with a CC BY 4.0 license](https://data.gov.ie/dataset/weather-stations/resource/602fc03a-bfb3-4501-b56b-09fb1564c9ed). This file contains information on weather stations; their names, locations, the agency responsible for that stations, and a URL to a page with the weather readings of that station. The CSV file contains the following rows (with the first being the header):
 
 | Name | Weather_Reading | Agency | LAT | LONG |
 |--|--|--|--|--|
