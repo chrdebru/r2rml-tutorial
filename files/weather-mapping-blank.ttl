@@ -74,6 +74,7 @@
 	rr:subjectMap [
 		rr:template "http://data.example.org/geom/{LONG}/{LAT}" ;
 		rr:class geo:Geometry ;
+		rr:termType rr:BlankNode ;
 	] ;
 	
 	rr:predicateObjectMap [

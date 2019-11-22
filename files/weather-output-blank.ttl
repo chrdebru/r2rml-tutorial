@@ -1,0 +1,58 @@
+<http://data.example.org/ws/Dublin%20Airport>
+        a       <http://www.opengis.net/ont/geosparql#Feature> , <http://www.example.org/ont#WeatherStation> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Dublin Airport"@en , "Dublin Airport" ;
+        <http://www.w3.org/2000/01/rdf-schema#seeAlso>
+                <http://www.met.ie/latest/reports.asp> ;
+        <http://www.example.org/ont#withWeatherReading>
+                <http://www.met.ie/latest/reports.asp> ;
+        <http://www.opengis.net/ont/geosparql#hasGeometry>
+                [ a       <http://www.opengis.net/ont/geosparql#Geometry> ;
+                  <http://www.opengis.net/ont/geosparql#asWKT>
+                          "POINT(-6.29784754004026 53.4215060785623)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>
+                ] .
+
+<http://data.example.org/ws/M50%20Dublin%20Airport>
+        a       <http://www.opengis.net/ont/geosparql#Feature> , <http://www.example.org/ont#WeatherStation> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "M50 Dublin Airport"@en , "M50 Dublin Airport" ;
+        <http://www.w3.org/2000/01/rdf-schema#seeAlso>
+                <http://www.nratraffic.ie/weather/default.asp?weatherstation=IR57&selected=true&showonly=true> ;
+        <http://www.example.org/ont#withWeatherReading>
+                <http://www.nratraffic.ie/weather/default.asp?weatherstation=IR57&selected=true&showonly=true> ;
+        <http://www.opengis.net/ont/geosparql#hasGeometry>
+                [ a       <http://www.opengis.net/ont/geosparql#Geometry> ;
+                  <http://www.opengis.net/ont/geosparql#asWKT>
+                          "POINT(-6.22759742761812 53.4096411069945)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>
+                ] .
+
+<http://data.example.org/ws/M50%20Blanchardstown>
+        a       <http://www.opengis.net/ont/geosparql#Feature> , <http://www.example.org/ont#WeatherStation> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "M50 Blanchardstown"@en , "M50 Blanchardstown" ;
+        <http://www.w3.org/2000/01/rdf-schema#seeAlso>
+                <http://www.nratraffic.ie/weather/default.asp?weatherstation=IR26&selected=true&showonly=true> ;
+        <http://www.example.org/ont#withWeatherReading>
+                <http://www.nratraffic.ie/weather/default.asp?weatherstation=IR26&selected=true&showonly=true> ;
+        <http://www.opengis.net/ont/geosparql#hasGeometry>
+                [ a       <http://www.opengis.net/ont/geosparql#Geometry> ;
+                  <http://www.opengis.net/ont/geosparql#asWKT>
+                          "POINT(-6.38085144711153 53.3704660326011)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>
+                ] .
+<http://data.example.org/ws/Dublin%20Airport>
+        <http://www.w3.org/2003/01/geo/wgs84_pos#lat>
+                "53.4215060785623"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://www.w3.org/2003/01/geo/wgs84_pos#long>
+                "-6.29784754004026"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://data.example.org/ws/M50%20Dublin%20Airport>
+        <http://www.w3.org/2003/01/geo/wgs84_pos#lat>
+                "53.4096411069945"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://www.w3.org/2003/01/geo/wgs84_pos#long>
+                "-6.22759742761812"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://data.example.org/ws/M50%20Blanchardstown>
+        <http://www.w3.org/2003/01/geo/wgs84_pos#lat>
+                "53.3704660326011"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://www.w3.org/2003/01/geo/wgs84_pos#long>
+                "-6.38085144711153"^^<http://www.w3.org/2001/XMLSchema#double> .
