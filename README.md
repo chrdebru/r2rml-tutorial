@@ -1,8 +1,13 @@
 # R2RML: A Step-by-step Tutorial
 
-Christophe Debruyne  
-ADAPT, Trinity College Dublin  
-WISE, Vrije Universiteit Brussel
+<div style="text-align: center">
+
+[Christophe Debruyne ](http://christophedebruyne.be/)  
+---
+[ADAPT](https://www.adaptcentre.ie/), [Trinity College Dublin](https://www.tcd.ie/)  
+[WISE](https://wise.vub.ac.be/), [Vrije Universiteit Brussel](https://www.vub.be/)
+
+</div>
 
 # 1 Introduction
 
@@ -10,7 +15,7 @@ The goal of this tutorial is to familiarize the reader with some core concepts o
 
 While R2RML was intended for relational databases, R2RML-F allows one to access CSV files as relational tables. This tutorial will use this feature so that a relational database will not be required for this tutorial. We use the [H2 Database Engine](https://www.h2database.com/html/main.html) to access CSV files as tables. This means that column names are capitalized (i.e, `emp` becomes `EMP`).
 
-The CSV file we will transform into RDF is [weatherstations.csv](./files/weatherstations.csv). This file contains information on weather stations; their name, locations, the agency responsible for that stations, and a URL to a page with the weather readings of that station. The contents of this file is the following:
+The CSV file we will transform into RDF is [weatherstations.csv](./files/weatherstations.csv). This file contains information on weather stations; their names, locations, the agency responsible for that stations, and a URL to a page with the weather readings of that station. The CSV file contains the following rows (with the first being the header):
 
 | Name | Weather_Reading | Agency | LAT | LONG |
 |--|--|--|--|--|
@@ -18,7 +23,7 @@ The CSV file we will transform into RDF is [weatherstations.csv](./files/weather
 | M50 Dublin Airport | ... | National Roads Authority | 53.4096411069945 | -6.22759742761812 |
 | Dublin Airport | ... | Met Éireann | 53.4215060785623 | -6.29784754004026 |
 
-Note that the column "Weather_Reading" contains URLs in the file. We have omitted those for brevity. We will transform the contents of this CSV file into RDF using the [GeoSPARQL](https://www.opengeospatial.org/standards/geosparql). In GeoSPARQL, there is a distinction between features and geometries. Features are the "things" that one can represent on a map, and geometries are the way those things are represented using points, lines, polygons, etc. For each record in our CSV we thus have information on weather stations (the feature) and the longitude and latitude that constitute a point on a map (the geometry). Features and geometries are connected using the `geo:hasGeometry` predicate.
+Note that the column "Weather_Reading" contains URLs in the file. We have omitted those for brevity. We will transform the contents of this CSV file into RDF using the [GeoSPARQL](https://www.opengeospatial.org/standards/geosparql). In GeoSPARQL, there is a distinction between features and geometries. Features are the "things" that one can represent on a map, and geometries are the way those things are represented using points, lines, polygons, etc. For each record in our CSV file, we thus have information on weather stations (the feature) and the longitude and latitude that constitute a point on a map (the geometry). Features and geometries are connected using the `geo:hasGeometry` predicate.
 
 Before we start, we will first create the configuration file for our R2RML-F engine. The contents of that file, which we call `weather-config.properties` is as follows:
 
@@ -91,7 +96,7 @@ We will not provide the whole output for each step in this tutorial, but we will
 
 ## 2.2 Generating Labels for Weather Stations
 
-We will now provide labels for Weather Stations. We know those labels are in English, so we can use that column for both the default label (i.e., with not language tag) and English labels. The predicate we will use is `rdfs:label`. Since we are going to use the same predicate for both label, we only need to declare one Predicate Object Map with one predicate (for `rdfs:label`) and two object maps (one for the default label and one for the English label).
+We will now provide labels for Weather Stations. We know those labels are in English, so we can use that column for both the default label (i.e., with no language tag) and English labels. The predicate we will use is `rdfs:label`. Since we are going to use the same predicate for both labels, we only need to declare one Predicate Object Map with one predicate (for `rdfs:label`) and two object maps (one for the default label and one for the English label).
 
 ```
   rr:predicateObjectMap [
@@ -101,7 +106,7 @@ We will now provide labels for Weather Stations. We know those labels are in Eng
   ] ;
 ```
 
-The resulting triples for one of the weather stations is as follows:
+The resulting triples for one of the weather stations are as follows:
 
 ```
 <http://data.example.org/ws/Dublin%20Airport>
@@ -137,7 +142,7 @@ These predicate object maps result in:
 
 You will notice that the engine will generate literals if you remove the `rr:datatype xsd:double` statements. I encourage you to try that.
 
-## 2.4 Providing the Weather Readings
+## 2.4 Providing Weather Readings
 
 We will now provide the weather readings (the URLs) as a resource with both `rdfs:seeAlso` and `fcc:withWeatherReading`. We can thus use one predicate object map with two predicates and one object map. The column `WEATHER_READING` contains a URL, but R2RML states that term maps with a `rr:column` generate literals. If we want to generate resources, however, we need to declare that in the mapping. The mapping looks as follows:
 
