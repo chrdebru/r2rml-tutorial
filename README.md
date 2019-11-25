@@ -34,7 +34,7 @@ This informs the engine that `weatherstations.csv` will be transformed into RDF 
 
 We now create `weather-mapping.ttl` and add the following prefixes:
 
-```
+```turtle
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix fcc: <http://www.example.org/ont#> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
@@ -51,7 +51,7 @@ The namespace `geo` is used for GeoSPARQL. The names spaces `rr`, `rdfs`, and `x
 
 We first create the triples map for weather stations (the feature). Every triples map needs a logical table and a subject map. The subject map is responsible for creating the subjects and any type declarations.
 
-```
+```turtle
 # PREFIXES APPEAR HERE
 
 <#WeatherStation>
@@ -77,7 +77,7 @@ We now execute the mapping with:
 
 And six triples should be generated:
 
-```
+```turtle
 <http://data.example.org/ws/Dublin%20Airport>
         a       <http://www.opengis.net/ont/geosparql#Feature> , <http://www.example.org/ont#WeatherStation> .
 
@@ -94,7 +94,7 @@ We will not provide the whole output for each step in this tutorial, but we will
 
 We will now provide labels for Weather Stations. We know those labels are in English, so we can use that column for both the default label (i.e., with no language tag) and English labels. The predicate we will use is `rdfs:label`. Since we are going to use the same predicate for both labels, we only need to declare one Predicate Object Map with one predicate (for `rdfs:label`) and two object maps (one for the default label and one for the English label).
 
-```
+```turtle
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
     rr:objectMap [ rr:column "NAME" ] ;
@@ -104,7 +104,7 @@ We will now provide labels for Weather Stations. We know those labels are in Eng
 
 The resulting triples for one of the weather stations are as follows:
 
-```
+```turtle
 <http://data.example.org/ws/Dublin%20Airport>
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "Dublin Airport" , "Dublin Airport"@en .
@@ -114,7 +114,7 @@ The resulting triples for one of the weather stations are as follows:
 
 Now we will use the `geo2` namespace to publish the longitude and the latitude. They need to be published as `xsd:double`. If we do not provide any instructions, R2RML prescribes that literals should be generated. We extend the mapping with two predicate object maps.
 
-```
+```turtle
   rr:predicateObjectMap [
     rr:predicate geo2:lat ;
     rr:objectMap [ rr:column "LAT" ; rr:datatype xsd:double ] ;
@@ -128,7 +128,7 @@ Now we will use the `geo2` namespace to publish the longitude and the latitude. 
 
 These predicate object maps result in:
 
-```
+```turtle
 <http://data.example.org/ws/Dublin%20Airport>
         <http://www.w3.org/2003/01/geo/wgs84_pos#lat>
                 "53.4215060785623"^^<http://www.w3.org/2001/XMLSchema#double> ;
@@ -142,7 +142,7 @@ You will notice that the engine will generate literals if you remove the `rr:dat
 
 We will now provide the weather readings (the URLs) as a resource with both `rdfs:seeAlso` and `fcc:withWeatherReading`. We can thus use one predicate object map with two predicates and one object map. The column `WEATHER_READING` contains a URL, but R2RML states that term maps with a `rr:column` generate literals. If we want to generate resources, however, we need to declare that in the mapping. The mapping looks as follows:
 
-```
+```turtle
   rr:predicateObjectMap [
   rr:predicate rdfs:seeAlso, fcc:withWeatherReading ;
     rr:objectMap [ rr:column "WEATHER_READING" ; rr:termType rr:IRI ] ;
@@ -151,7 +151,7 @@ We will now provide the weather readings (the URLs) as a resource with both `rdf
 
 This mapping results in:
 
-```
+```turtle
 <http://data.example.org/ws/Dublin%20Airport>
         <http://www.w3.org/2000/01/rdf-schema#seeAlso>
                 <http://www.met.ie/latest/reports.asp> ;
@@ -169,7 +169,7 @@ The triples map for geometries is pretty straightforward. It uses the same table
 
 We have one predicate object map for the generation of [WKT](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) literals. Both longitude and latitude are used to fill in a template. R2RML prescribes that templates are used to generate IRIs. Here, however, we have to generate a literal (typed as `geo:wktLiteral`). The `rr:datatype` declaration will inform the engine that literals have to be produced as only literals can be data-typed.
 
-```
+```turtle
 <#Geometries>
   a rr:TriplesMap ;
 
@@ -192,7 +192,7 @@ We have one predicate object map for the generation of [WKT](https://en.wikipedi
 
 Geometries then look as follows:
 
-```
+```turtle
 <http://data.example.org/geom/-6.22759742761812/53.4096411069945>
         a       <http://www.opengis.net/ont/geosparql#Geometry> ;
         <http://www.opengis.net/ont/geosparql#asWKT>
@@ -213,7 +213,7 @@ Geometries then look as follows:
 
 Now that we have a triples map for geometries, we can create a predicate object map that relates features and geometries. It is true that in this simple case we can avail of a "simple" predicate object map, but we will now illustrate a predicate object map referring to another triples map with join conditions. The R2RML engine will thus create triples based on an SQL join. We extend the first triples map as follows:
 
-```
+```turtle
   rr:predicateObjectMap [
     rr:predicate geo:hasGeometry;
     rr:objectMap [
@@ -228,7 +228,7 @@ Now that we have a triples map for geometries, we can create a predicate object 
 
 The two logical tables are joined using the column `NAME` resulting in:
 
-```
+```turtle
 <http://data.example.org/ws/Dublin%20Airport>
         <http://www.opengis.net/ont/geosparql#hasGeometry>
                 <http://data.example.org/geom/-6.29784754004026/53.4215060785623> .
@@ -250,7 +250,7 @@ format = TRIG
 
 Then we change the two predicate object maps of our weather triples map by adding a `rr:graph` statements.
 
-```
+```turtle
   rr:predicateObjectMap [
     rr:graph <http://data.example.org/graph/geo> ;
     rr:predicate geo2:lat ;
@@ -272,7 +272,7 @@ Then we change the two predicate object maps of our weather triples map by addin
 
 R2RML states that if the graph maps of both the subject map and the predicate object map are empty, then triples are written to the default graph; otherwise the triples are written to the union of both graph maps. Since the subject map has no graph maps (i.e., {}), the union is {} U {`http://data.example.org/graph/geo`}. In other words, those triples will appear in the named graph http://data.example.org/graph/geo and not in the default graph:
 
-```
+```turtle
 # TRIPLES IN DEFAULT GRAPH OMITTED
 
 <http://data.example.org/graph/geo> {
@@ -305,7 +305,7 @@ Let's assume that we do not want to "publish" our geometries as resources with a
 
 We amend the subject map of the geometries triples map as follows:
 
-```
+```turtle
   rr:subjectMap [
     rr:template "{LONG}-{LAT}" ;
     rr:class geo:Geometry ;
@@ -315,7 +315,7 @@ We amend the subject map of the geometries triples map as follows:
 
 After running the R2RML engine, we see that it generates the following triples:
 
-```
+```turtle
 <http://data.example.org/ws/Dublin%20Airport>
         <http://www.opengis.net/ont/geosparql#hasGeometry>
                 [ a       <http://www.opengis.net/ont/geosparql#Geometry> ;
