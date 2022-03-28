@@ -9,7 +9,7 @@
 
 The goal of this tutorial is to familiarize the reader with some core concepts of [R2RML](https://www.w3.org/TR/r2rml/). The R2RML engine we will use is [R2RML-F](https://github.com/chrdebru/r2rml), though we will not avail of any functionality outside of R2RML's specification. I assume that the reader has downloaded or installed an R2RML engine.
 
-While R2RML was intended for relational databases, R2RML-F allows one to access CSV files as relational tables. This tutorial will use this feature so that a relational database will not be required for this tutorial. We use the [H2 Database Engine](https://www.h2database.com/html/main.html) to access CSV files as tables. This means that column names are capitalized (i.e, `emp` becomes `EMP`).
+While R2RML was intended for relational databases, R2RML-F allows one to access CSV files as relational tables. This tutorial will use this feature so that a relational database will not be required for this tutorial. We use the [H2 Database Engine](https://www.h2database.com/html/main.html) to access CSV files as tables. This means that column names are capitalized (i.e., `emp` becomes `EMP`).
 
 The CSV file we will transform into RDF is [weatherstations.csv](./files/weatherstations.csv). This CSV file was published by [Dublinked.ie with a CC BY 4.0 license](https://data.gov.ie/dataset/weather-stations/resource/602fc03a-bfb3-4501-b56b-09fb1564c9ed). This file contains information on weather stations; their names, locations, the agency responsible for that stations, and a URL to a page with the weather readings of that station. The CSV file contains the following rows (with the first being the header):
 
@@ -324,7 +324,7 @@ After running the R2RML engine, we see that it generates the following triples:
                 ] .
 ```
 
-I encourage the reader to add a row to the CSV file with different values for `Name`, `Weather_Reading`, and `Agency`, but the values of `LAT` and `LONG` of one of the previous rows. Even thought it does not make sense in the "real world", the reader will notice that two records will generate one blank node and all statements are merged. In other words, two weather stations will point to the same blank node. If the reader were to add a fifth row by copying the first and choosing different values for `LAT` and `LONG`, the reader will notice that this weather station will refer to two different geometries.
+I encourage the reader to add a row to the CSV file with different values for `Name`, `Weather_Reading`, and `Agency`, but the values of `LAT` and `LONG` of one of the previous rows. Even though it does not make sense in the "real world", the reader will notice that two records will generate one blank node and all statements are merged. In other words, two weather stations will point to the same blank node. If the reader were to add a fifth row by copying the first and choosing different values for `LAT` and `LONG`, the reader will notice that this weather station will refer to two different geometries.
 
 # 7 Some Final Considerations
 
